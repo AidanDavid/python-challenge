@@ -39,10 +39,6 @@ with open(file_to_load) as financial_data:
         # calculate change in profit/loss
         curr_val = int(row[1])
         val_change = curr_val - prev_val
-        print(curr_val)
-        print(prev_val)
-        print(val_change)
-
 
         # calculate total profit/loss
         val_total = val_total + curr_val
