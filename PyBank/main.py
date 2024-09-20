@@ -28,6 +28,7 @@ with open(file_to_load) as financial_data:
     # initialize max/min with first val
     line = next(reader)
     max_val, min_val = (line[0], int(line[1])), (line[0], int(line[1]))
+    prev_val = int(line[1])
 
     # loop through every row
     for row in reader:
@@ -37,7 +38,11 @@ with open(file_to_load) as financial_data:
 
         # calculate change in profit/loss
         curr_val = int(row[1])
-        val_change = prev_val + curr_val
+        val_change = curr_val - prev_val
+        print(curr_val)
+        print(prev_val)
+        print(val_change)
+
 
         # calculate total profit/loss
         val_total = val_total + curr_val
@@ -47,6 +52,8 @@ with open(file_to_load) as financial_data:
             max_val = (row[0], curr_val)
         if curr_val < min_val[1]:
             min_val = (row[0], curr_val)
+
+        prev_val = curr_val
 
     # form output
     output = "Financial Analysis\n----------------------------\nTotal Months: " + str(months) + "\nTotal: $" + str(val_total) + "\nAverage Change: $" + str(round(val_change/months, 2)) + "\nGreatest Increase in Profits: " + max_val[0] + " ($"+ str(max_val[1]) + ")" + "\nGreatest Decrease in Profits: " + min_val[0] + " ($"+ str(min_val[1]) + ")"
