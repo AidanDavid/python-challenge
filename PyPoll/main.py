@@ -17,7 +17,7 @@ votes_dict = {}
 with open(file_to_load) as election_data:
     reader = csv.reader(election_data)
 
-    # skip first line
+    # skip header
     header = next(reader)
 
     # loop through every row
@@ -26,8 +26,10 @@ with open(file_to_load) as election_data:
         # get total votes
         total_votes = total_votes + 1
 
+        # form dictionary of candidates and vote tallies
         votes_dict[row[2]] = votes_dict.get(row[2], 0) + 1
 
+    # determine winner
     winner = max(votes_dict, key=votes_dict.get)
 
     # form output

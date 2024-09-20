@@ -22,8 +22,8 @@ val_total = 0
 with open(file_to_load) as financial_data:
     reader = csv.reader(financial_data)
 
-    # skip first line
-    next(reader)
+    # skip header
+    header = next(reader)
 
     # initialize max/min with first val
     line = next(reader)
@@ -48,6 +48,7 @@ with open(file_to_load) as financial_data:
         if curr_val < min_val[1]:
             min_val = (row[0], curr_val)
 
+    # form output
     output = "Financial Analysis\n----------------------------\nTotal Months: " + str(months) + "\nTotal: $" + str(val_total) + "\nAverage Change: $" + str(round(val_change/months, 2)) + "\nGreatest Increase in Profits: " + max_val[0] + " ($"+ str(max_val[1]) + ")" + "\nGreatest Decrease in Profits: " + min_val[0] + " ($"+ str(min_val[1]) + ")"
 
     # print output in terminal
